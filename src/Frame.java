@@ -4,7 +4,7 @@ import javax.swing.JFrame;
 public class Frame extends JFrame {
     Frame() {
         add(new Panel());
-        setTitle("S nake");
+        setTitle("Snake");
         setDefaultCloseOperation(3);
         setResizable(false);
         pack();
