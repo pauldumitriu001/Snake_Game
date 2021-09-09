@@ -8,9 +8,11 @@ import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.io.File;
+import java.util.Random;
 
 public class Game extends JPanel implements KeyListener, ActionListener {
     private ImageIcon title;    //Title image created from photoshop
+    private ImageIcon bg; //Background
 
     //Snake body is within these arrays
     private int snakeX[] = new int[750];
@@ -28,14 +30,14 @@ public class Game extends JPanel implements KeyListener, ActionListener {
     private ImageIcon headRight;
     private ImageIcon tail;
 
-    private int snakeLength = 3;    //snake starts with a head
-    private int score = 0;
+    private int snakeLength = 1;    //snake starts with a head
 
     private final Timer timer;
     private boolean first = true;   //is this the first move
 
-    private int fruitX;
-    private int fruitY;
+    private final Random random = new Random();
+    private int fruitX = (random.nextInt(33) + 1) * 25;
+    private int fruitY = (random.nextInt(20) + 3) * 25;
     private ImageIcon fruit;
 
     Game(){
@@ -58,7 +60,7 @@ public class Game extends JPanel implements KeyListener, ActionListener {
             snakeY[1] = 100;
             snakeY[2] = 100;
         }
-
+        Image resizer;  //used to resize the image in case the resources are to large
         //display title
         title = new ImageIcon("Snake Title.png");
         title.paintIcon(this, g, 225, 30);
@@ -68,11 +70,18 @@ public class Game extends JPanel implements KeyListener, ActionListener {
         g.drawRect(24, 74, 851, 577);
 
         //display background
-        g.setColor(new Color(0, 153, 0));
-        g.fillRect(25, 75, 850, 575);
+//        g.setColor(Color.green);
+//        g.fillRect(25, 75, 850, 575);
+        bg = new ImageIcon("snake-backdrop.png.png");
+        resizer = bg.getImage().getScaledInstance(850, 575, Image.SCALE_SMOOTH);
+        bg = new ImageIcon(resizer);
+        bg.paintIcon(this, g, 25, 75);
+
+        g.setColor(Color.white);
+        g.setFont(new Font("serif", Font.PLAIN, 14));
+        g.drawString("Snake Length: " + (snakeLength - 1), 780, 50);
 
         //initial position
-        Image resizer;  //used to resize the image in case the resources are to large
         headUp = new ImageIcon("headUp.png");
         resizer = headUp.getImage().getScaledInstance(30, 30, Image.SCALE_SMOOTH);
         headUp = new ImageIcon(resizer);
@@ -94,8 +103,49 @@ public class Game extends JPanel implements KeyListener, ActionListener {
             if(i != 0){
                 printTail(resizer, g, i);
             }
+
+            if(collides()){
+                snakeLength++;
+                generateFruit();
+            }
+
+            //load the picture
+            fruit = new ImageIcon("fruit.png");
+            resizer = fruit.getImage().getScaledInstance(30, 30, Image.SCALE_SMOOTH);
+            fruit = new ImageIcon(resizer);
+            fruit.paintIcon(this, g, fruitX, fruitY);
         }
+
+        for(int i = 1; i < snakeLength; i++){
+            if(snakeX[0] == snakeX[i] && snakeY[0] == snakeY[i]){   //check if snake collides with itself
+                up = false;
+                down = false;
+                right = false;
+                left = false;
+
+                g.setColor(Color.RED);
+                g.setFont(new Font("serif", Font.BOLD, 40));
+                g.drawString("Game Over, Score: " + (snakeLength - 1), 250, 300);
+            }
+        }
+
         g.dispose();
+    }
+
+    /**
+     * Check if snake eats apple
+     */
+    private boolean collides(){
+        return fruitX == snakeX[0] && fruitY == snakeY[0];
+    }
+
+    /**
+     * Generate a new fruit
+     */
+    private void generateFruit(){
+        //Generate random coords
+        fruitX = (random.nextInt(33) + 1) * 25;
+        fruitY = (random.nextInt(20) + 3) * 25;
     }
 
     /**
@@ -207,7 +257,7 @@ public class Game extends JPanel implements KeyListener, ActionListener {
                 snakeX[x] = snakeX[x - 1];
             }
             if(snakeX[x] > 850){
-                //Implement game over
+                snakeX[x] = 25;
             }
         }
     }
@@ -227,7 +277,7 @@ public class Game extends JPanel implements KeyListener, ActionListener {
                 snakeX[x] = snakeX[x - 1];
             }
             if(snakeX[x] < 25){
-                //Implement game over
+                snakeX[x] = 850;
             }
         }
     }
@@ -246,8 +296,8 @@ public class Game extends JPanel implements KeyListener, ActionListener {
             else{   //move the tail relative to the head
                 snakeY[y] = snakeY[y - 1];
             }
-            if(snakeX[y] < 55){
-                //Implement game over
+            if(snakeY[y] < 75){
+                snakeY[y] = 625;
             }
         }
     }
@@ -266,8 +316,8 @@ public class Game extends JPanel implements KeyListener, ActionListener {
             else{   //move the tail relative to the head
                 snakeY[y] = snakeY[y - 1];
             }
-            if(snakeX[y] > 625){
-                //Implement game over
+            if(snakeY[y] > 625){
+                snakeY[y] = 75;
             }
         }
     }
