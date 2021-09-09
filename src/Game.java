@@ -16,7 +16,7 @@ public class Game extends JPanel implements KeyListener, ActionListener {
 
     public void playMusic(){
         try{
-            File file = new File("src/bensound-energy.wav");
+            File file = new File("res/bensound-energy.wav");
             if(file.exists()) {
                 AudioInputStream ais = AudioSystem.getAudioInputStream(file);
                 Clip clip = AudioSystem.getClip();
