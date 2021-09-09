@@ -3,6 +3,8 @@
     <output-path>$PROJECT_DIR$/out/artifacts/Snake_Game_jar</output-path>
     <root id="archive" name="Snake_Game.jar">
       <element id="module-output" name="Snake_Game" />
+      <element id="dir-copy" path="$PROJECT_DIR$/res" />
+      <element id="module-source" name="Snake_Game" />
     </root>
   </artifact>
 </component>
