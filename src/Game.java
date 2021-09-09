@@ -62,7 +62,7 @@ public class Game extends JPanel implements KeyListener, ActionListener {
         }
         Image resizer;  //used to resize the image in case the resources are to large
         //display title
-        title = new ImageIcon("Snake Title.png");
+        title = new ImageIcon("res/Snake Title.png");
         title.paintIcon(this, g, 225, 30);
 
         //display border
@@ -70,19 +70,19 @@ public class Game extends JPanel implements KeyListener, ActionListener {
         g.drawRect(24, 74, 851, 577);
 
         //display background
-//        g.setColor(Color.green);
-//        g.fillRect(25, 75, 850, 575);
-        bg = new ImageIcon("snake-backdrop.png.png");
-        resizer = bg.getImage().getScaledInstance(850, 575, Image.SCALE_SMOOTH);
-        bg = new ImageIcon(resizer);
-        bg.paintIcon(this, g, 25, 75);
+        g.setColor(Color.green);
+        g.fillRect(25, 75, 850, 575);
+//        bg = new ImageIcon("res/snake-backdrop.png.png");
+//        resizer = bg.getImage().getScaledInstance(850, 575, Image.SCALE_SMOOTH);
+//        bg = new ImageIcon(resizer);
+//        bg.paintIcon(this, g, 25, 75);
 
         g.setColor(Color.white);
         g.setFont(new Font("serif", Font.PLAIN, 14));
         g.drawString("Snake Length: " + (snakeLength - 1), 780, 50);
 
         //initial position
-        headUp = new ImageIcon("headUp.png");
+        headUp = new ImageIcon("res/headUp.png");
         resizer = headUp.getImage().getScaledInstance(30, 30, Image.SCALE_SMOOTH);
         headUp = new ImageIcon(resizer);
         headUp.paintIcon(this, g, snakeX[0], snakeY[0]);
@@ -110,7 +110,7 @@ public class Game extends JPanel implements KeyListener, ActionListener {
             }
 
             //load the picture
-            fruit = new ImageIcon("fruit.png");
+            fruit = new ImageIcon("res/fruit.png");
             resizer = fruit.getImage().getScaledInstance(30, 30, Image.SCALE_SMOOTH);
             fruit = new ImageIcon(resizer);
             fruit.paintIcon(this, g, fruitX, fruitY);
@@ -153,7 +153,7 @@ public class Game extends JPanel implements KeyListener, ActionListener {
      * @param resizer helper object to resize the image
      */
     private void flipUp(Image resizer, Graphics g, int i){
-        headUp = new ImageIcon("headUp.png");
+        headUp = new ImageIcon("res/headUp.png");
         resizer = headUp.getImage().getScaledInstance(30, 30, Image.SCALE_SMOOTH);
         headUp = new ImageIcon(resizer);
         headUp.paintIcon(this, g, snakeX[i], snakeY[i]);
@@ -164,7 +164,7 @@ public class Game extends JPanel implements KeyListener, ActionListener {
      * @param resizer helper object to resize the image
      */
     private void flipDown(Image resizer, Graphics g, int i){
-        headDown = new ImageIcon("headDown.png");
+        headDown = new ImageIcon("res/headDown.png");
         resizer = headDown.getImage().getScaledInstance(30, 30, Image.SCALE_SMOOTH);
         headDown = new ImageIcon(resizer);
         headDown.paintIcon(this, g, snakeX[i], snakeY[i]);
@@ -175,7 +175,7 @@ public class Game extends JPanel implements KeyListener, ActionListener {
      * @param resizer helper object to resize the image
      */
     private void flipRight(Image resizer, Graphics g, int i){
-        headRight = new ImageIcon("headRight.png");
+        headRight = new ImageIcon("res/headRight.png");
         resizer = headRight.getImage().getScaledInstance(30, 30, Image.SCALE_SMOOTH);
         headRight = new ImageIcon(resizer);
         headRight.paintIcon(this, g, snakeX[i], snakeY[i]);
@@ -186,7 +186,7 @@ public class Game extends JPanel implements KeyListener, ActionListener {
      * @param resizer helper object to resize the image
      */
     private void flipLeft(Image resizer, Graphics g, int i){
-        headLeft = new ImageIcon("headLeft.png");
+        headLeft = new ImageIcon("res/headLeft.png");
         resizer = headLeft.getImage().getScaledInstance(30, 30, Image.SCALE_SMOOTH);
         headLeft = new ImageIcon(resizer);
         headLeft.paintIcon(this, g, snakeX[i], snakeY[i]);
@@ -197,7 +197,7 @@ public class Game extends JPanel implements KeyListener, ActionListener {
      * @param resizer helper object to resize the image
      */
     private void printTail(Image resizer, Graphics g, int i){
-        tail = new ImageIcon("tail.png");
+        tail = new ImageIcon("res/tail.png");
         resizer = tail.getImage().getScaledInstance(30, 30, Image.SCALE_SMOOTH);
         tail = new ImageIcon(resizer);
         tail.paintIcon(this, g, snakeX[i], snakeY[i]);
