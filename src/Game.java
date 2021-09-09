@@ -70,16 +70,17 @@ public class Game extends JPanel implements KeyListener, ActionListener {
         g.drawRect(24, 74, 851, 577);
 
         //display background
-        g.setColor(Color.green);
+        g.setColor(Color.black);
         g.fillRect(25, 75, 850, 575);
 //        bg = new ImageIcon("res/snake-backdrop.png.png");
 //        resizer = bg.getImage().getScaledInstance(850, 575, Image.SCALE_SMOOTH);
 //        bg = new ImageIcon(resizer);
 //        bg.paintIcon(this, g, 25, 75);
 
-        g.setColor(Color.white);
-        g.setFont(new Font("serif", Font.PLAIN, 14));
-        g.drawString("Snake Length: " + (snakeLength - 1), 780, 50);
+        //Snake Length
+        g.setColor(Color.black);
+        g.setFont(new Font("serif", Font.PLAIN, 20));
+        g.drawString("Snake Length: " + (snakeLength - 1), 760, 50);
 
         //initial position
         headUp = new ImageIcon("res/headUp.png");
